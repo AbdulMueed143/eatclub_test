@@ -19,14 +19,14 @@ class OpportunityRepository @Inject constructor(
             remoteDataSource.getOpportunities()
         },
         saveCallResult = {
-//            localDataSource.insertAll(it)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({
-//
-//                },{
-//
-//                })
+            localDataSource.insertAll(it.data.listOfOpportunities)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+
+                },{
+
+                })
         }
     )
 }
