@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.google.android.play.core.internal.t
 import com.google.gson.annotations.SerializedName
+
 
 /**
  * Opportunity
@@ -42,11 +44,30 @@ data class Opportunity(
 
 
     @Ignore
+    var position : Int = 0
+
+    @Ignore
+    var positionAsString: String = ""
+    get() {
+        return "Opportunity $position"
+    }
+
+    @Ignore
     var timeAsString : String = ""
         get() {
-
-            return "$startTime - $endTime"
+            val startHour: Int = startTime.toInt() / 60 //since both are ints, you get an int
+            val endHour: Int = endTime.toInt() / 60 //since both are ints, you get an int
+            val startMinutes: Int = startTime.toInt() % 60
+            val endMinutes: Int = endTime.toInt() % 60
+            return "$startHour : $startMinutes${hourToAmPM(startHour)} - $endHour : $endMinutes${hourToAmPM(endHour)}"
         }
+
+    private fun hourToAmPM(hour: Int) : String {
+        if (hour > 11 )
+            return "PM"
+
+        return "AM"
+    }
 
     @Ignore
     var discountValue : Int = 0

@@ -15,11 +15,38 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/heading"
+            android:textColor="@color/pinkish"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:text="Daily Opportunities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <TextView
+            android:padding="5dp"
+            android:layout_below="@id/heading"
+            android:id="@+id/info"
+            android:textColor="@color/grey"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:text="Our AI model has Identified the following opportunities for your venue today."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/info"
             android:background="@color/white"
             android:padding="@dimen/dim_8dp"
             android:id="@+id/rcyOpportunities"
@@ -30,6 +57,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </layout>

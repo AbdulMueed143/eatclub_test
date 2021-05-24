@@ -31,6 +31,7 @@ class OpportunitiesAdapter(private val opportunityViewModel: OpportunityViewMode
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = opportunityViewModel.opportunities?.get(position)
+        item?.position = position + 1
         return holder.bind(opportunityViewModel, item)
     }
 
