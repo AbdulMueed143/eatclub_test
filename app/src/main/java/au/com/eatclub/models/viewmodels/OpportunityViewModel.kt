@@ -14,17 +14,27 @@ class OpportunityViewModel  @Inject constructor(private val opportunityRepositor
     var _opportunities : LiveData<Resource<List<Opportunity>>>? = null
     var opportunities : List<Opportunity>? = null
 
-    private val _postNowEvent = MutableLiveData<Event<Int>>()
-    val postNowEvent: LiveData<Event<Int>> = _postNowEvent
+    private val _postNowEvent = MutableLiveData<Event<String>>()
+    val postNowEvent: LiveData<Event<String>> = _postNowEvent
 
-    private val _increment = MutableLiveData<Event<Int>>()
-    val increment: LiveData<Event<Int>> = _increment
+    private val _increment = MutableLiveData<Event<String>>()
+    val increment: LiveData<Event<String>> = _increment
 
-    private val _decrement = MutableLiveData<Event<Int>>()
-    val decrement: LiveData<Event<Int>> = _decrement
+    private val _decrement = MutableLiveData<Event<String>>()
+    val decrement: LiveData<Event<String>> = _decrement
 
     fun loaOpportunities() {
         _opportunities = opportunityRepository.getOpportunities()
+    }
+
+    fun incrementValue(objectId: String) {
+        _increment.value = Event(objectId)
+    }
+
+    fun decrementValue(objectId: String) {
+        _decrement.value = Event(objectId)
+
+
     }
 
 }

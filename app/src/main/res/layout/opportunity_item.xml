@@ -17,76 +17,189 @@
     </data>
 
     <LinearLayout
+        android:background="@color/transparent"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="110dp">
 
         <TextView
             android:textStyle="bold"
             android:padding="5dp"
-            android:text="Opportunity "
+            android:text="Opportunity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </TextView>
 
         <LinearLayout
-            android:weightSum="110"
+
+            android:weightSum="120"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_weight="30"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_weight="30"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_weight="30"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
-
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                bind:cardElevation="@dimen/cardview_default_elevation"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/white"
+                bind:cardCornerRadius="10dp"
                 android:layout_weight="20"
                 android:layout_width="0dp"
+
                 android:layout_height="match_parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:backgroundTint="@color/design_default_color_error"
-                    bind:cardElevation="10dp"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:text="Post Now"
-                        android:textColor="@color/white"
-                        android:layout_width="wrap_content"
+                        android:text="Deal"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                     </TextView>
 
-                </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/pinkish"
+                        android:text="@{opportunity.discount}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                    </TextView>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_weight="10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:onClick="@{() -> opportunityViewModel.incrementValue(opportunity.objectId)}"
+                    android:background="@color/grey"
+                    android:backgroundTint="@color/grey"
+                    android:src="@drawable/ic_up"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp">
+
+                </ImageView>
+
+                <ImageView
+                    android:onClick="@{() -> opportunityViewModel.decrementValue(opportunity.objectId)}"
+
+                    android:background="@color/grey"
+                    android:backgroundTint="@color/grey"
+                    android:src="@drawable/ic_down"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp">
+
+                </ImageView>
             </LinearLayout>
 
 
+
+            <com.google.android.material.card.MaterialCardView
+                bind:cardElevation="@dimen/cardview_default_elevation"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:layout_marginLeft="5dp"
+                bind:cardCornerRadius="10dp"
+                android:layout_weight="30"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="@{opportunity.timeAsString}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                bind:cardElevation="@dimen/cardview_default_elevation"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:layout_marginLeft="5dp"
+                bind:cardCornerRadius="10dp"
+                android:layout_weight="30"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Expected Customers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="@{opportunity.prediction}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+                <RelativeLayout
+                    android:layout_weight="20"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_centerInParent="true"
+                        android:backgroundTint="@color/pinkish"
+                        android:text="Post Now"
+                        android:textSize="11dp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+
+                </RelativeLayout>
+
         </LinearLayout>
 
-
-
     </LinearLayout>
-
-
 
 </layout>

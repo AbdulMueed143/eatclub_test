@@ -2,6 +2,7 @@ package au.com.eatclub.models.entitymodels
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -29,17 +30,36 @@ data class Opportunity(
     @SerializedName(COL_END_TIME)
     val endTime : String,
 
+    @ColumnInfo(name = COL_DISCOUNT)
+    @SerializedName(COL_DISCOUNT)
+    var discount : String,
+
     @ColumnInfo(name = COL_PREDICTION)
     @SerializedName(COL_PREDICTION)
     val prediction : String
 
     ) : Cloneable {
 
+
+    @Ignore
+    var timeAsString : String = ""
+        get() {
+
+            return "$startTime - $endTime"
+        }
+
+    @Ignore
+    var discountValue : Int = 0
+        get() {
+            return discount.replace("%", "").toInt()
+        }
+
     companion object {
         const val TABLE_NAME = "opportunity"
 
         const val COL_OBJECT_ID = "objectId"
         const val COL_CREATED = "created"
+        const val COL_DISCOUNT = "discount"
         const val COL_START_TIME = "startTime"
         const val COL_END_TIME = "endTime"
         const val COL_PREDICTION = "prediction"

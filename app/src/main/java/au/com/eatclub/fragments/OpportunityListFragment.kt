@@ -1,6 +1,7 @@
 package au.com.eatclub.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import au.com.eatclub.adapters.OpportunitiesAdapter
 import au.com.eatclub.databinding.OpportunityListFragmentBinding
 import au.com.eatclub.di.ViewModelProviderFactory
 import au.com.eatclub.models.viewmodels.OpportunityViewModel
+import au.com.eatclub.util.EventObserver
 import au.com.eatclub.util.Resource
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -74,6 +76,35 @@ class OpportunityListFragment : DaggerFragment() {
 
                 Resource.Status.LOADING -> {
                     //We make sure there is loading bar
+                }
+            }
+        })
+
+
+        viewModel.increment.observe(viewLifecycleOwner, EventObserver {
+            viewModel._opportunities?.value?.data?.forEach {
+                opp -> kotlin.run {
+                Log.d("Opportunities", it + " - " + opp.objectId)
+                    if (it.equals(opp.objectId, ignoreCase = true)) {
+                        if((opp.discountValue + 5) <= 50) {
+                            opp.discount = (opp.discountValue + 5).toString()+"%"
+                            opportunityListFragmentBinding.rcyOpportunities.adapter?.notifyDataSetChanged()
+                        }
+                    }
+                }
+            }
+        })
+
+        viewModel.decrement.observe(viewLifecycleOwner, EventObserver {
+            viewModel._opportunities?.value?.data?.forEach {
+                    opp -> kotlin.run {
+                    Log.d("Opportunities", it + " - " + opp.objectId)
+                    if (it.equals(opp.objectId, ignoreCase = true)) {
+                        if((opp.discountValue - 5) >= 10) {
+                            opp.discount = (opp.discountValue - 5).toString()+"%"
+                            opportunityListFragmentBinding.rcyOpportunities.adapter?.notifyDataSetChanged()
+                        }
+                    }
                 }
             }
         })
